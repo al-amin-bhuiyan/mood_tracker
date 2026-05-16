@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-
-enum MoodType {
-  happy,
-  neutral,
-  sad,
-  excited,
-  anxious,
-}
+import 'package:mood_tracker/core/constants/mood_type.dart';
 
 class MoodConfig {
   final Color primaryColor;
