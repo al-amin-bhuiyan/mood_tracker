@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mood_tracker/core/constants/app_constants.dart';
 import 'package:mood_tracker/core/constants/mood_type.dart';
 import 'package:mood_tracker/presentation/controllers/mood_controller.dart';
 import 'package:mood_tracker/presentation/widgets/mood_face_widget.dart';
@@ -14,8 +15,19 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mood Tracker'),
+        title: const Text(AppConstants.appName),
         centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete_outline),
+            onPressed: () {
+              controller.clearMoods();
+            },
+            tooltip: 'Clear all moods',
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -72,4 +84,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-

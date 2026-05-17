@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mood_tracker/core/constants/mood_config.dart';
 import 'package:mood_tracker/core/constants/mood_type.dart';
-import 'package:mood_tracker/presentation/widgets/painters/base_mood_painter.dart';
+import 'package:mood_tracker/presentation/widgets/painters/anxious_mood_painter.dart';
+import 'package:mood_tracker/presentation/widgets/painters/excited_mood_painter.dart';
 import 'package:mood_tracker/presentation/widgets/painters/happy_mood_painter.dart';
 import 'package:mood_tracker/presentation/widgets/painters/neutral_mood_painter.dart';
 import 'package:mood_tracker/presentation/widgets/painters/sad_mood_painter.dart';
-import 'package:mood_tracker/presentation/widgets/painters/excited_mood_painter.dart';
-import 'package:mood_tracker/presentation/widgets/painters/anxious_mood_painter.dart';
 
 /// Factory that creates a painter for a given [MoodType].
 class MoodPainterFactory {
@@ -28,5 +27,3 @@ class MoodPainterFactory {
     }
   }
 }
-
-

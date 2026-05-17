@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mood_tracker/core/constants/mood_config.dart';
+
 import 'package:mood_tracker/presentation/widgets/painters/base_mood_painter.dart';
 
 class NeutralMoodPainter extends BaseMoodPainter {
-  NeutralMoodPainter(MoodConfig config) : super(config);
+  NeutralMoodPainter(super.config);
 
   @override
   void drawMouth(Canvas canvas, Offset center, double radius, Paint paint) {

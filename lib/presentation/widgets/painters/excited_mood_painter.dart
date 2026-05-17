@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mood_tracker/core/constants/mood_config.dart';
+
 import 'package:mood_tracker/presentation/widgets/painters/base_mood_painter.dart';
 
 class ExcitedMoodPainter extends BaseMoodPainter {
-  ExcitedMoodPainter(MoodConfig config) : super(config);
+  ExcitedMoodPainter(super.config);
 
   @override
   void drawMouth(Canvas canvas, Offset center, double radius, Paint paint) {
