@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mood_tracker/core/theme/app_theme.dart';
 import 'package:mood_tracker/bindings/app_binding.dart';
+import 'package:mood_tracker/presentation/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,11 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Mood Tracker',
       theme: AppTheme.lightTheme(),
       initialBinding: AppBinding(),
-      home: const Scaffold(
-        body: SizedBox.expand(
-          child: ColoredBox(color: Colors.white),
-        ),
-      ),
+      home: const HomeScreen(),
     );
   }
 }
