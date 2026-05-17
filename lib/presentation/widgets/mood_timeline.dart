@@ -46,45 +46,89 @@ class MoodTimeline extends StatelessWidget {
   }
 }
 
-class _MoodTimelineCard extends StatelessWidget {
+class _MoodTimelineCard extends StatefulWidget {
   final MoodEntry entry;
 
   const _MoodTimelineCard({required this.entry});
 
   @override
-  Widget build(BuildContext context) {
-    final config = MoodConfig.fromType(entry.moodType);
-    final dateLabel = DateFormat('MMM d').format(entry.loggedAt);
+  State<_MoodTimelineCard> createState() => _MoodTimelineCardState();
+}
 
-    return Container(
-      width: 160,
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        color: config.backgroundColor,
-        borderRadius: BorderRadius.circular(12.0),
+class _MoodTimelineCardState extends State<_MoodTimelineCard> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 350),
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.2).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeOutBack,
       ),
-      child: Row(
-        children: [
-          MoodFaceWidget(moodType: entry.moodType, size: 50),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  config.label,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  dateLabel,
-                  style: TextStyle(color: Colors.grey[700], fontSize: 12),
-                ),
-              ],
-            ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onTap() {
+    _controller.forward().then((_) {
+      // Reverse the animation if the widget is still mounted
+      if (mounted) {
+        _controller.reverse();
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final config = MoodConfig.fromType(widget.entry.moodType);
+    final dateLabel = DateFormat('MMM d').format(widget.entry.loggedAt);
+
+    return GestureDetector(
+      onTap: _onTap,
+      child: ScaleTransition(
+        scale: _scaleAnimation,
+        child: Container(
+          width: 160,
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: config.backgroundColor,
+            borderRadius: BorderRadius.circular(12.0),
           ),
-        ],
+          child: Row(
+            children: [
+              MoodFaceWidget(moodType: widget.entry.moodType, size: 50),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      config.label,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      dateLabel,
+                      style: TextStyle(color: Colors.grey[700], fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
