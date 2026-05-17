@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mood_tracker/core/constants/mood_type.dart';
 import 'package:mood_tracker/presentation/controllers/mood_controller.dart';
 import 'package:mood_tracker/presentation/widgets/mood_face_widget.dart';
+import 'package:mood_tracker/presentation/widgets/mood_timeline.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -59,7 +60,11 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 48),
+              const SizedBox(height: 24),
+              const Divider(),
+              const SizedBox(height: 12),
+              const MoodTimeline(),
+              const SizedBox(height: 24),
             ],
           ),
         ),
